@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 export PATH="$(dirname $0)/usr/bin:${PATH}"
-export LD_LIBRARY_PATH="$(dirname $0)/usr/lib:${LD_LIBRARY_PATH}"
 
 if [ "$1" == "cli" ] || [ "$(basename "$ARGV0")" == "keepassxc-cli" ] || [ "$(basename "$ARGV0")" == "keepassxc-cli.AppImage" ]; then
     [ "$1" == "cli" ] && shift
