@@ -1,3 +1,7 @@
+This fok contains a modification to enable the autotype window on Wayland. No autotype is performed but a shortcut can be configured to execute the command `dbus-send --session --type=method_call --dest=org.keepassxc.KeePassXC.MainWindow /keepassxc org.keepassxc.KeePassXC.MainWindow.requestGlobalAutoType`. This will open the little autotype dialog. The password can then be copied with `Ctrl+C` and the username with `Ctrl+B`. If one of those shortcuts is pressed the dialog closes. Although this isn't autotype, for me it makes KeePassXC way more usable under Wayland.
+
+Disclaimer: A lot of the code is from this pull request: [#10905](https://github.com/keepassxreboot/keepassxc/pull/10905), which also aims to enable full autotype on Wayland.
+
 # <img src="https://keepassxc.org/assets/img/keepassxc.svg" width="40" height="40"/> KeePassXC
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/6326/badge)](https://bestpractices.coreinfrastructure.org/projects/6326)
 [![TeamCity Build Status](https://ci.keepassxc.org/app/rest/builds/buildType:\(project:KeepassXC\)/statusIcon)](https://ci.keepassxc.org/?guest=1)

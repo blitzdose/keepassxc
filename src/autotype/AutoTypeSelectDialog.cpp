@@ -225,6 +225,12 @@ bool AutoTypeSelectDialog::eventFilter(QObject* obj, QEvent* event)
     } else if (obj == m_ui->search) {
         if (event->type() == QEvent::KeyPress) {
             auto* keyEvent = static_cast<QKeyEvent*>(event);
+            // Capture Ctrl+C inside the QLineEdit because it's handled like e.g. Ctrl+A
+            if (keyEvent->key() == Qt::Key_C && keyEvent->modifiers() & Qt::ControlModifier) {
+                // Trigger action to copy password to clipboard
+                m_actionMenu->actions()[5]->trigger();
+                return true;
+            }
             switch (keyEvent->key()) {
             case Qt::Key_Up:
                 m_ui->view->moveSelection(-1);
@@ -351,7 +357,7 @@ void AutoTypeSelectDialog::buildActionMenu()
     });
 #endif
 
-    copyUsernameAction->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_1);
+    copyUsernameAction->setShortcut(Qt::CTRL + Qt::Key_B);
     copyUsernameAction->setProperty(MENU_FIELD_PROP_NAME, MENU_FIELD::USERNAME);
     connect(copyUsernameAction, &QAction::triggered, this, [&] {
         auto entry = m_ui->view->currentMatch().first;
@@ -361,7 +367,7 @@ void AutoTypeSelectDialog::buildActionMenu()
         }
     });
 
-    copyPasswordAction->setShortcut(Qt::CTRL + Qt::SHIFT + Qt::Key_2);
+    copyPasswordAction->setShortcut(Qt::CTRL + Qt::Key_C);
     copyPasswordAction->setProperty(MENU_FIELD_PROP_NAME, MENU_FIELD::PASSWORD);
     connect(copyPasswordAction, &QAction::triggered, this, [&] {
         auto entry = m_ui->view->currentMatch().first;
